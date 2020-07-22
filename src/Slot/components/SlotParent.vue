@@ -1,23 +1,36 @@
 <template>
     <div >
-        <slot-child>
-            <h2 slot="title">{{ title }}</h2>
-            <p slot="content">{{ content }}</p>
-        </slot-child>
+
+        <button @click="selectComponent = 'SlotChild'">SlotChild</button>
+        <button @click="selectComponent = 'AppAuthor'">Author</button>
+        <button @click="selectComponent = 'AppNew'">New</button>
+        <hr>
+        <p>SelectComponent: {{ selectComponent }}</p>
+        <keep-alive>
+        <component :is="selectComponent">
+            <p>Defalut Content</p>
+        </component>
+        </keep-alive>
     </div>
 </template>
 
 <script>
 import SlotChild from './SlotChild'
+import AppAuthor from './Author'
+import AppNew from './New'
+
 export default {
     data: function(){
         return {
             title: 'The Slot',
-            content: 'is wonderful!'
+            content: 'is wonderful!',
+            selectComponent: 'SlotChild'
         }
     },
     components:{
-        SlotChild
+        SlotChild,
+        AppAuthor,
+        AppNew
     }
 }
 </script>

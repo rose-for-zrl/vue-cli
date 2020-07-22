@@ -3,7 +3,7 @@
         <h3>You may view the User Details here</h3>
         <p>Many Details</p>
         <div>User Name : {{ switchName() }}</div>
-        <!-- <div>User Age : {{ useAge() }}</div> -->
+        <div>User Age : {{ useAge }}</div> 
         <button @click="resetName">Reset Name</button>
         <button @click="resetFu()">Reset Name</button>
     </div>
@@ -16,8 +16,12 @@ import eventBus from '../../Shared/Bus.vue'
             myName: {
                 type: String
             },
-            resetFu: Function,
-            useAge: ''
+            resetFu: Function
+        },
+        data: function(){
+            return {
+                useAge: null
+            }
         },
         methods: {
             switchName() {
@@ -31,7 +35,7 @@ import eventBus from '../../Shared/Bus.vue'
         created() {
             this.useAge = eventBus.useAge;
             eventBus.$on('userAgeWarReset', (age) =>{
-                 this.userAge = age;
+                 this.useAge = age;
             })
         }
     }
