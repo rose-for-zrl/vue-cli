@@ -1,10 +1,13 @@
 <template>
     <div class="container">
-        <form>
+        <form v-if="!isSubmited">
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                     <h1>File a Complaint</h1>
                     <hr>
+                    <div class="form-group">
+                        <app-full-name v-model = "userData.fullName" :fullName = "userData.fullName"></app-full-name>
+                    </div>
                     <div class="form-group">
                         <label for="email">Mail</label>
                         <input
@@ -19,7 +22,8 @@
                                 type="password"
                                 id="password"
                                 class="form-control"
-                                v-model="userData.password">
+                                v-model.lazy="userData.password">
+                        <p>{{ userData.password }}</p>
                     </div>
                     <div class="form-group">
                         <label for="age">Age</label>
@@ -39,7 +43,8 @@
                     <textarea
                             id="message"
                             rows="5"
-                            class="form-control"></textarea>
+                            class="form-control"
+                            v-model="message"></textarea>
                 </div>
             </div>
             <div class="row">
@@ -49,13 +54,15 @@
                             <input
                                     type="checkbox"
                                     id="sendmail"
-                                    value="SendMail"> Send Mail
+                                    value="SendMail"
+                                    v-model="sendMail"> Send Mail
                         </label>
                         <label for="sendInfomail">
                             <input
                                     type="checkbox"
                                     id="sendInfomail"
-                                    value="SendInfoMail"> Send Infomail
+                                    value="SendInfoMail"
+                                    v-model="sendMail"> Send Infomail
                         </label>
                     </div>
 
@@ -67,13 +74,15 @@
                         <input
                                 type="radio"
                                 id="male"
-                                value="Male"> Male
+                                value="Male"
+                                v-model="userData.gender"> Male
                     </label>
                     <label for="female">
                         <input
                                 type="radio"
                                 id="female"
-                                value="Female"> Female
+                                value="Female"
+                                v-model="userData.gender"> Female
                     </label>
                 </div>
             </div>
@@ -82,39 +91,49 @@
                     <label for="priority">Priority</label>
                     <select
                             id="priority"
-                            class="form-control">
-                        <option></option>
+                            class="form-control"
+                            v-model="selectPriority">
+                        <option v-for="priority in priorities" 
+                        :selected="priority=='Medium'">{{ priority }}</option>
                     </select>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                    <app-switch v-model="dataSwitch"></app-switch>
+                </div>
+            </div>            
             <hr>
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                     <button
-                            class="btn btn-primary">Submit!
+                            class="btn btn-primary"
+                            @click.prevent="submited">Submit!
                     </button>
                 </div>
             </div>
         </form>
         <hr>
-        <div class="row">
+        <div class="row" v-if="isSubmited">
             <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4>Your Data</h4>
                     </div>
                     <div class="panel-body">
+                        <p>FullName: {{ userData.fullName }}</p>
                         <p>Mail: {{ userData.email }}</p>
                         <p>Password: {{ userData.password }}</p>
                         <p>Age: {{ userData.age }}</p>
-                        <p>Message: </p>
+                        <p style="white-space: pre">Message: {{ message }} </p>
                         <p><strong>Send Mail?</strong></p>
                         <ul>
-                            <li></li>
+                            <li v-for="mail in sendMail"> {{ mail }}</li>
                         </ul>
-                        <p>Gender:</p>
-                        <p>Priority:</p>
-                        <p>Switched:</p>
+                        <p>Gender: {{ userData.gender }}</p>
+                        <p>Priority: {{ selectPriority }}</p>
+                        <p>Switched: {{ dataSwitch }}</p>
+                        <button @click="isSubmited = false" class="btn btn-primary">Return</button>
                     </div>
                 </div>
             </div>
@@ -123,14 +142,34 @@
 </template>
 
 <script>
+import AppSwitch from '../assem/Switch'
+import FullName from '../assem/FullName'
+
     export default {
         data(){
             return {
                 userData: {
+                    fullName: 'Li Rose',
                     email: null,
                     password: null,
-                    age: null
-                }
+                    age: null,
+                    gender: 'Male'
+                },
+                message: 'this is init String',
+                sendMail: [],
+                priorities: ['High','Medium', 'Low'],
+                selectPriority: 'Medium',
+                dataSwitch: true,
+                isSubmited: false,
+            }
+        },
+        components: {
+            AppSwitch: AppSwitch,
+            AppFullName: FullName
+        },
+        methods: {
+            submited() {
+                this.isSubmited = true
             }
         }
     }
