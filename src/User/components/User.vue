@@ -1,5 +1,6 @@
 <template>
     <div class="component">
+        <button class="btn btn-primary" @click="navigateToHome">Go To Home</button>
         <h1>The User Component</h1>
         <p>I'm an awesome User!</p>
         <button @click="changeName">Change myName</button>
@@ -27,7 +28,8 @@
     export default {
         data: function(){
             return {
-                name: 'Max'
+                name: 'Max',
+                id: this.$rou
             }
         },
         components: {
@@ -43,6 +45,9 @@
             },
             resetName() {
                 this.name = 'LiLi';
+            },
+            navigateToHome() {
+                this.$router.push("/");
             }
         }
     }

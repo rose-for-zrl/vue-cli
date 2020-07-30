@@ -11,7 +11,7 @@ import AppHttp from './vueResource/Http'; //使用vue-resource 做http交互
 
 export const routes = [
     {path: '', component: Home},
-    {path: '/user', component: AppUser},
+    {path: '/user/:id', component: AppUser},
     {path: '/server', component: AppServer},
     {path: '/slot', component: AppSlot},
     {path: '/beauty', component: AppBeauty},
