@@ -24,7 +24,10 @@ export const routes = [
     }, children: [   //子路由
         {path: '', component: AppUserStar},
         {path: ':id', component: AppUserDetail},
-        {path: ':id/edit', component: AppUserEdit, name: "userEdit"}
+        {path: ':id/edit', component: AppUserEdit, name: "userEdit", beforeEnter: (to, form, next) =>{
+            console.info("inside route setup");
+            next();
+        }}
     ]},
     {path: '/server', component: AppServer},
     {path: '/slot', component: AppSlot},

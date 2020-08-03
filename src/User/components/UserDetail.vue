@@ -20,6 +20,13 @@ export default {
                 hash: '#data'
             }
         }
+    },
+    beforeRouteEnter(to, from, next) { //检查用户是否可以访问当前组件   main.js  router.js  components
+        if(true){
+            next();
+        }else{
+            next(false);
+        }
     }
 }
 </script>

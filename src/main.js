@@ -19,6 +19,14 @@ const router = new VueRouter({
   }
 });
 
+//设置每次路由跳转前执行方法
+router.beforeEach((to, from, next) =>{
+  console.info('global beforeEach');
+  next();  //继续跳转
+  // next(false);//停止跳转，停在当前页面
+  // next("/");//重定向到某个路由页面
+});
+
 //配置http
 Vue.use(VueResource);
 Vue.http.options.root = 'http://127.0.0.1:8003/';
