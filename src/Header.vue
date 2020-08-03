@@ -3,7 +3,7 @@
         
     <ul class="nav nav-pills">
         <router-link to="/" tag="li" active-class="active" exact=""><a>主页</a></router-link>
-        <router-link to="/user/10" tag="li" active-class="active"><a>用户操作</a></router-link>
+        <router-link to="/user" tag="li" active-class="active"><a>用户操作</a></router-link>
         <router-link to="/server" tag="li" active-class="active"><a>Server练习</a></router-link>
         <router-link to="/slot" tag="li" active-class="active"><a>Slot演示</a></router-link>
         <router-link to="/beauty" tag="li" active-class="active"><a>练习</a></router-link>

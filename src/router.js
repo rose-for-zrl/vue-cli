@@ -1,5 +1,9 @@
 import Home from './Home.vue';
+import AppHeader from './Header.vue';
 import AppUser from './User/components/User.vue'; //数据双向绑定  两个不相关组件，传递数据  基础
+import AppUserStar from './User/components/UserStart.vue';
+import AppUserDetail from './User/components/UserDetail.vue';
+import AppUserEdit from './User/components/UserEdit.vue';
 import AppServer from './Server/components/AppServer'; // 
 import AppSlot from './slot/components/SlotParent'; //slot component  动态指定子组件   数据传入子组件中
 import AppBeauty from './beauty/components/Beauty'; //练习
@@ -10,8 +14,18 @@ import AppAnimation from './animation/components/Animation';//动画 过渡
 import AppHttp from './vueResource/Http'; //使用vue-resource 做http交互
 
 export const routes = [
-    {path: '', component: Home},
-    {path: '/user/:id', component: AppUser},
+    {path: '',name: 'home', components: {  //定义路径名称 路由组件
+        default: Home,
+        'header-top': AppHeader
+    }},
+    {path: '/user',name: 'user', components:{
+        default: AppUser,
+        'header-bottom':AppHeader
+    }, children: [   //子路由
+        {path: '', component: AppUserStar},
+        {path: ':id', component: AppUserDetail},
+        {path: ':id/edit', component: AppUserEdit, name: "userEdit"}
+    ]},
     {path: '/server', component: AppServer},
     {path: '/slot', component: AppSlot},
     {path: '/beauty', component: AppBeauty},
@@ -19,5 +33,7 @@ export const routes = [
     {path: '/directive', component: AppDirective},
     {path: '/filter', component: AppFilter},
     {path: '/animation', component: AppAnimation},
-    {path: '/http', component: AppHttp}
+    {path: '/http', component: AppHttp},
+    {path: '/redirect-me', redirect: {name: 'user'}},  //重定向
+    {path: '*', redirect: {name: 'home'}}
 ];

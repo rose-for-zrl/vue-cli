@@ -1,5 +1,5 @@
 <template>
-    <div class="component">
+    <!-- <div class="component">
         <button class="btn btn-primary" @click="navigateToHome">Go To Home</button>
         <h1>The User Component</h1>
         <p>I'm an awesome User!</p>
@@ -18,23 +18,24 @@
                 <app-user-edit></app-user-edit>
             </div>
         </div>
+    </div> -->
+    <div>
+        <h1>The User Page</h1>
+        <hr>
+        <button class="btn btn-primary" @click="navigateToHome">Go To Home</button>
+        <hr>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
-    import UserDetail from './UserDetail.vue';
-    import UserEdit from './UserEdit.vue';
 
     export default {
         data: function(){
             return {
-                name: 'Max',
-                id: this.$rou
+                name: 'Max'
+               // id: this.$route.params.id
             }
-        },
-        components: {
-            appUserDetail: UserDetail,
-            appUserEdit: UserEdit
         },
         methods: {
             changeName() {

@@ -8,7 +8,15 @@ import VueResource from 'vue-resource'
 Vue.use(VueRouter);
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'history',
+  scrollBehavior(to, from, savedPosition) {   //设置跳转到某个页面并定位到某个元素id
+    if(savedPosition){ //如果回退，则回退到之前定位的位置
+      return savedPosition;
+    }
+    if(to.hash){   
+      return {selector: to.hash};
+    }
+  }
 });
 
 //配置http
