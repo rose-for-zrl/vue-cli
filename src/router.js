@@ -1,6 +1,12 @@
 import Home from './Home.vue';
 import AppHeader from './Header.vue';
-import AppUser from './User/components/User.vue'; //数据双向绑定  两个不相关组件，传递数据  基础
+// import AppUser from './User/components/User.vue'; //数据双向绑定  两个不相关组件，传递数据  基础
+//懒加载
+const AppUser = resolve => {
+    require.ensure(['./User/components/User.vue'], () => {
+        resolve(require('./User/components/User.vue'));
+    });
+};
 import AppUserStar from './User/components/UserStart.vue';
 import AppUserDetail from './User/components/UserDetail.vue';
 import AppUserEdit from './User/components/UserEdit.vue';
@@ -12,6 +18,9 @@ import AppDirective from './directive/Backgroud'; //directive  全局自定义�
 import AppFilter from './filter/components/Filter'; //过滤器 及其替代方案 计算属性； 混入
 import AppAnimation from './animation/components/Animation';//动画 过渡
 import AppHttp from './vueResource/Http'; //使用vue-resource 做http交互
+
+
+
 
 export const routes = [
     {path: '',name: 'home', components: {  //定义路径名称 路由组件
