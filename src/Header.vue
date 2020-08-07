@@ -12,6 +12,7 @@
         <router-link to="/filter" tag="li" active-class="active"><a>过滤器、混入</a></router-link>
         <router-link to="/animation" tag="li" active-class="active"><a>动画、过渡</a></router-link>
         <router-link to="/http" tag="li" active-class="active"><a>http请求</a></router-link>
+        <router-link  to="/vuex"  tag="li" active-class="active"><a>Vuex状态管理</a></router-link>
     </ul>
     </nav>
 </template>

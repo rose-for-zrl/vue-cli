@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import { routes} from './router'
 import VueResource from 'vue-resource'
 
+import  { store }  from './vuex/store/store'
+
 //配置router
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -35,5 +37,6 @@ Vue.http.headers.common['Authorization'] = 'Basic YXBpOnBhc3N3b3Jk';
 new Vue({
   el: '#app',
   router: router,
+  store,
   render: h => h(App)
 })

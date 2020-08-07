@@ -18,6 +18,7 @@ import AppDirective from './directive/Backgroud'; //directive  全局自定义�
 import AppFilter from './filter/components/Filter'; //过滤器 及其替代方案 计算属性； 混入
 import AppAnimation from './animation/components/Animation';//动画 过渡
 import AppHttp from './vueResource/Http'; //使用vue-resource 做http交互
+import AppVuex from './vuex/Vuex'; //vuex管理数据状态
 
 
 
@@ -47,5 +48,6 @@ export const routes = [
     {path: '/animation', component: AppAnimation},
     {path: '/http', component: AppHttp},
     {path: '/redirect-me', redirect: {name: 'user'}},  //重定向
+    {path: '/vuex', component: AppVuex},
     {path: '*', redirect: {name: 'home'}}
 ];
